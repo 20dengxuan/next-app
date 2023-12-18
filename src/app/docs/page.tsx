@@ -19,9 +19,7 @@ const DocsFC: React.FC<{
             width={0}
             height={0}
             alt=""
-            src={
-              "https://assets-us-01.kc-usercontent.com:443/a99c6ff3-1e1d-000a-2573-c93dfb21cf6e/d2370b26-fe0d-4c99-9a06-cd79df7a3c3a/cover.jpg"
-            }
+            src="/cover.jpeg"
           />
         </div>
       </div>
@@ -40,7 +38,6 @@ const DocsFC: React.FC<{
                 height={0}
                 alt=""
                 src={item.cover}
-                className="shadow-sm hover:shadow-md transition-shadow duration-200"
               />
             </div>
 

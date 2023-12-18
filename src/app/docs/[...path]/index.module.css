@@ -1,0 +1,6 @@
+.page {
+  max-width: 1200px;
+  box-sizing: border-box;
+  margin: auto;
+  padding: 0 32px;
+}
