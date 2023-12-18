@@ -31,8 +31,12 @@ const Search: React.FC = () => {
         placeholder="搜索"
         type="text"
         onChange={inputChange}
-        onBlur={() => {
-          setList([]);
+        onFocus={inputChange}
+        onBlur={(e) => {
+          e.preventDefault();
+          setTimeout(() => {
+            setList([]);
+          }, 100);
         }}
       />
       {!!list.length && (
