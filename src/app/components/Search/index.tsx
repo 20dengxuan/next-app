@@ -36,7 +36,7 @@ const Search: React.FC = () => {
           e.preventDefault();
           setTimeout(() => {
             setList([]);
-          }, 100);
+          }, 300);
         }}
       />
       {!!list.length && (
