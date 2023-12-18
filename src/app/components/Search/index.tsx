@@ -6,7 +6,7 @@ import dir from "@/markdown";
 
 const Search: React.FC = () => {
   const [list, setList] = useState<{ title: string; path: string }[]>([]);
-
+  const [isShow, setShow] = useState(false);
   const inputChange: React.ChangeEventHandler<HTMLInputElement> = (v) => {
     if (v.target.value) {
       setList(
@@ -25,32 +25,34 @@ const Search: React.FC = () => {
       setList([]);
     }
   };
+
   return (
-    <div className={style["search"]}>
-      <input
-        placeholder="搜索"
-        type="text"
-        onChange={inputChange}
-        onFocus={inputChange}
-        onBlur={(e) => {
-          e.preventDefault();
-          setTimeout(() => {
-            setList([]);
-          }, 300);
-        }}
-      />
-      {!!list.length && (
-        <div className={style["searchBox"]}>
-          {list.map((item) => {
-            return (
-              <a href={"/docs/" + item.path} key={item.path}>
-                {item.title}
-              </a>
-            );
-          })}
-        </div>
+    <>
+      <a onClick={() => setShow(true)}>Search</a>
+      {isShow && (
+        <>
+          <div className={style["mark"]} onClick={() => setShow(false)}></div>
+          <div className={style["search"]}>
+            <input
+              placeholder="search"
+              type="text"
+              onChange={inputChange}
+              onFocus={inputChange}
+            />
+
+            <div className={style["searchBox"]}>
+              {list.map((item) => {
+                return (
+                  <div key={item.path}>
+                    <a href={"/docs/" + item.path}>{item.title}</a>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </>
       )}
-    </div>
+    </>
   );
 };
 
