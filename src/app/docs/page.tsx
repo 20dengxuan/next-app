@@ -9,6 +9,12 @@ const DocsFC: React.FC<{
 }> = async ({ searchParams }) => {
   const { page = 1 } = searchParams;
 
+  const list = Object.keys(dir).map((key) => {
+    return {
+      ...dir[key],
+    };
+  });
+
   return (
     <main className={style["page"]}>
       <div>
@@ -25,7 +31,7 @@ const DocsFC: React.FC<{
       </div>
       <div className={style["list-title"]}>list.</div>
       <div className={style["list-grid"]}>
-        {dir.map((item, index) => (
+        {list.map((item, index) => (
           <a
             href={"/docs/" + item.path}
             key={index}
@@ -37,7 +43,7 @@ const DocsFC: React.FC<{
                 width={0}
                 height={0}
                 alt=""
-                src={item.cover}
+                src={item.cover || "/cover.jpeg"}
               />
             </div>
 

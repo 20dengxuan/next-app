@@ -2,10 +2,12 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import style from "./index.module.css";
+import dir from "@/markdown";
+import Image from "next/image";
 
 const fs = require("fs");
 const path = require("path");
-let dir = path.resolve("./src/markdown");
+let fileDir = path.resolve("./src/markdown");
 
 const Detail: React.FC<{ params: { path: string[] } }> = async (props) => {
   const { path: reqPath } = props.params;
@@ -13,7 +15,7 @@ const Detail: React.FC<{ params: { path: string[] } }> = async (props) => {
   let isNotFound = false;
 
   try {
-    const mdFilePath = path.join(dir, reqPath.join("/") + ".md");
+    const mdFilePath = path.join(fileDir, reqPath.join("/") + ".md");
     content = fs.readFileSync(mdFilePath, "utf8");
   } catch {
     isNotFound = true;
@@ -24,6 +26,20 @@ const Detail: React.FC<{ params: { path: string[] } }> = async (props) => {
   ) : (
     <div className={style["page"]}>
       <div>
+        <h1>{dir?.[reqPath.join("/")]?.title || ""}</h1>
+        <h6>{dir?.[reqPath.join("/")]?.create_time || ""}</h6>
+        {dir?.[reqPath.join("/")]?.cover && (
+          <div style={{ display: "block" }}>
+            <Image
+              layout="responsive"
+              width={0}
+              height={0}
+              alt=""
+              src={dir?.[reqPath.join("/")]?.cover || ""}
+            ></Image>
+          </div>
+        )}
+
         <Markdown
           className={style["markdown"]}
           remarkPlugins={[remarkGfm]}
