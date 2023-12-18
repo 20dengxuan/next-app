@@ -2,7 +2,6 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import style from "./index.module.css";
-import { DB } from "@/utils/actionDb";
 
 const fs = require("fs");
 const path = require("path");
@@ -19,10 +18,6 @@ const Detail: React.FC<{ params: { path: string[] } }> = async (props) => {
   } catch {
     isNotFound = true;
   }
-
-  const db = new DB(reqPath);
-
-  const data = db.getFileContent();
 
   return isNotFound ? (
     "404"
@@ -54,8 +49,6 @@ const Detail: React.FC<{ params: { path: string[] } }> = async (props) => {
         >
           {content}
         </Markdown>
-
-        <div>查看 {data?.views || 0}</div>
       </div>
     </div>
   );
